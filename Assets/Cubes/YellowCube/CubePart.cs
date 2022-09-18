@@ -45,7 +45,9 @@ public class CubePart : Cube
              //удаление триггера присоеденения
              Destroy(other.gameObject);
              
-             rb.isKinematic = true;
+             transform.localScale = new Vector3(0.98f,0.98f,0.98f);//уменьшаемся в размере, чтобы лучше помещаться в щели 
+
+             Destroy(rb);
         }
     }
 }
