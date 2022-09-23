@@ -495,7 +495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1789044785397794369}
   m_Layer: 0
-  m_Name: 'PointForConnect '
+  m_Name: PointForConnect
   m_TagString: PointForConnect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

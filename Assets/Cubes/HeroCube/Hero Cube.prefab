@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4670408057126231250}
   m_Layer: 0
-  m_Name: 'PointForConnect '
+  m_Name: PointForConnect
   m_TagString: PointForConnect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -651,7 +651,5 @@ MonoBehaviour:
   pos: {x: 0, y: 0, z: 0}
   boxCollider: {fileID: 4670408057152916345}
   rb: {fileID: 4670408057152916346}
-  self: {fileID: 5481433472502901515}
   playerSpeed: 4
-  zPos: 0
   jumpForce: 330

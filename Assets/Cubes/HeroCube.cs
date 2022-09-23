@@ -5,14 +5,17 @@ using UnityEngine;
 public class HeroCube : Cube // герой как и любой куб является наследником класса Cube
 {
     public Rigidbody rb;
-    [SerializeField] private GameObject self; // сам игрок
-
+   
     public int playerSpeed;
     void Start()
     {
         boxCollider = gameObject.GetComponent<BoxCollider>();
         colorType = "Green";
         rb = gameObject.GetComponent<Rigidbody>();  
+
+
+        //подписываемся на событие, при котором заканчивается фаза 
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;
     }
 
     
@@ -22,30 +25,16 @@ public class HeroCube : Cube // герой как и любой куб явля�
         Jump();
     }
 
-
-    public float zPos;// постоянная позиция игрока по оси Z (как правило, статична)
     private void  Move() // передвижение
     {
-        transform.position = new Vector3(transform.position.x,transform.position.y,zPos);// теперь герой статичен по оси z
-        
-        if(Input.GetKey(KeyCode.D))
-        {
-            rb.velocity = new Vector3 
-            (self.transform.forward.x * playerSpeed  ,
-               rb.velocity.y,
-                self.transform.forward.z * playerSpeed );// аккуратно прибавляем скорость движения к уже имеющийся скорости
-
-            self.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(transform.rotation.x,90f,transform.rotation.z), 0.05f );// разворот в правую сторону
-        }
-
         if(Input.GetKey(KeyCode.A))
         {
-            rb.velocity = new Vector3 
-            (self.transform.forward.x * playerSpeed  ,
-               rb.velocity.y,
-                self.transform.forward.z * playerSpeed );// аккуратно прибавляем скорость движения к уже имеющийся строчке
+            rb.velocity = Vector3.left * playerSpeed + Vector3.up * rb.velocity.y; 
+        }
 
-            self.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(transform.rotation.x,270f,transform.rotation.z), 0.05f );// разворот в левую сторону
+        if(Input.GetKey(KeyCode.D))
+        {
+            rb.velocity = Vector3.right * playerSpeed + Vector3.up * rb.velocity.y;
         }
     }
 
@@ -56,5 +45,10 @@ public class HeroCube : Cube // герой как и любой куб явля�
         {
             rb.AddForce(Vector3.up * jumpForce);
         }
+    }
+
+    void OnEndPhase()
+    {
+        Debug.Log("I'll be lucky");
     }
 }

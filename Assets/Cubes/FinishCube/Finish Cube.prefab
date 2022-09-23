@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5775733445941171967}
   m_Layer: 0
   m_Name: Finish Cube
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7190300470814693342}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 2, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
@@ -93,7 +93,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7190300470814693342}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.01, y: 0.01, z: 0.01}
@@ -110,3 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e80c86396549754f93755b14038ca5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 
+  pos: {x: 0, y: 0, z: 0}
+  boxCollider: {fileID: 0}
+  activated: 0
+  distanceToActivate: 0.15
+  distanceToClosestCube: 0
+  closestCube: {fileID: 0}

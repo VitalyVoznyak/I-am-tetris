@@ -33,10 +33,7 @@ public class FinishCube : Cube
         cubesThanCanActivate = GameObject.FindGameObjectsWithTag("CubePart");// ищет кубы, которые могут его активировать - желтые \ зеленые
 
         float distance = 999999;
-        // GameObject closestCube = null;
         
-
-
         //проверяем дистанцию до каждого кубика
         foreach(GameObject CheckingCube in cubesThanCanActivate)                                        
         {
@@ -45,6 +42,11 @@ public class FinishCube : Cube
                 distance = Vector3.Distance(this.transform.position, CheckingCube.transform.position);
                 closestCube = CheckingCube;
             }   
+        }
+
+        if (distance > Vector3.Distance(GameObject.FindGameObjectWithTag("Player").transform.position, transform.position ))
+        {
+            closestCube = GameObject.FindGameObjectWithTag("Player").gameObject;
         }
         return closestCube;
     }

@@ -12,9 +12,14 @@ public class CubePart : Cube
     {
         IsConnected = false;
         rb = gameObject.GetComponent<Rigidbody>();
+
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;
     }
 
-    
+    void OnEndPhase()
+    {
+        Debug.Log("I'll be lucky part");
+    }
     void Update()
     {
         
@@ -29,7 +34,7 @@ public class CubePart : Cube
             IsConnected = true;
              // ищем точку в которую переместится данный объект
              GameObject point = other.transform.Find("PointForConnect").gameObject; 
-             //GameObject point = GameObject.FindGameObjectWithTag("Player").transform.Find($"{other.name}/PointForConnect").gameObject;
+            
              // меняем положение в пространстве
              transform.position = point.transform.position;
              transform.rotation = point.transform.rotation;
