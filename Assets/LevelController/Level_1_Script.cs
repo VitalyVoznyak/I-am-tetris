@@ -15,6 +15,8 @@ public class Level_1_Script : MonoBehaviour
     public int phaseCount; //какая сейчас фаза
     public GameObject[] phases;//массив фаз
 
+    
+
     void Start()
     {
         phases = new GameObject[40];
@@ -42,6 +44,7 @@ public class Level_1_Script : MonoBehaviour
     {
         if ( AllFinishCubeActivated() == true)
         {
+            forCheck = false;
             EndPhase();
         }
     }
@@ -50,12 +53,11 @@ public class Level_1_Script : MonoBehaviour
     {
         endPhase?.Invoke();//сообщаем всем подписанным объектам о переходе в следующую фазу
 
-
-        phases[phaseCount].SetActive(false);// выключаем пройденную фазу
+        phases[phaseCount]?.SetActive(false);// выключаем пройденную фазу
 
         phaseCount++;// увеличиваем номер текйщей фазы
 
-        phases[phaseCount].SetActive(true);// включаем нужную фазу
+        phases[phaseCount]?.SetActive(true);// включаем нужную фазу
     }
     [SerializeField] bool forCheck;  
     public FinishCube[] finishCubes;
@@ -71,10 +73,7 @@ public class Level_1_Script : MonoBehaviour
                {
                     forCheck = false;
                }
-               else
-               {
-                 forCheck = true;
-               }
+               
           }
           return forCheck;
           

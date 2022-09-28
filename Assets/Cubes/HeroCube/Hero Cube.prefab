@@ -651,5 +651,7 @@ MonoBehaviour:
   pos: {x: 0, y: 0, z: 0}
   boxCollider: {fileID: 4670408057152916345}
   rb: {fileID: 4670408057152916346}
+  startpos: {fileID: 0}
+  redCube: {fileID: 8979141608690693933, guid: f9c9268c537962245bac82b2955600bb, type: 3}
   playerSpeed: 4
   jumpForce: 330

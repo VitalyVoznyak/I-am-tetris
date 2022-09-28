@@ -651,3 +651,4 @@ MonoBehaviour:
   pos: {x: 0, y: 0, z: 0}
   boxCollider: {fileID: 0}
   IsConnected: 0
+  redCube: {fileID: 8979141608690693933, guid: f9c9268c537962245bac82b2955600bb, type: 3}

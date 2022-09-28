@@ -7,25 +7,31 @@ public class CubePart : Cube
     public bool IsConnected; //переменная, определяющая, присоеденен ли куб к гл герою
 
     private Rigidbody rb;
+    public GameObject redCube;//красный кубик которым мы заменяем пройденые фазы
+
+    GameObject closestFinishCube; //ближайший финиш-кубик
 
     void Start()
     {
         IsConnected = false;
         rb = gameObject.GetComponent<Rigidbody>();
 
-        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;//подписка на событие
     }
 
     void OnEndPhase()
-    {
-        Debug.Log("I'll be lucky part");
+    {   
+            if(IsConnected)
+            {
+                transform.parent = null;                                       //отсоединяемся от гл героя
+                Instantiate(redCube,transform.position, Quaternion.identity);  //создаем вместо себя красный куб 
+                this.gameObject.SetActive(false);                              //затем самовыключаемся
+            }
     }
-    void Update()
-    {
-        
-    }
+    
 
-    private void OnTriggerEnter(Collider other)
+     
+    private void OnTriggerEnter(Collider other)// процесс присоединения данного куба к игроку
     {   
         // процесс присоединения данного куба к игроку
         if (other.tag == "ConnectZone" && IsConnected == false)
@@ -48,7 +54,7 @@ public class CubePart : Cube
              transform.Find($"HeroCubeConnectZone3").GetComponent<BoxCollider>().enabled = true;
 
              //удаление триггера присоеденения
-             Destroy(other.gameObject);
+             //Destroy(other.gameObject);
              
              transform.localScale = new Vector3(0.98f,0.98f,0.98f);//уменьшаемся в размере, чтобы лучше помещаться в щели 
 

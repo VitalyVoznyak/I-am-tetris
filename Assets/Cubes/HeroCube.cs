@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class HeroCube : Cube // герой как и любой куб является наследником класса Cube
 {
-    public Rigidbody rb;
+    public Rigidbody rb; 
+
+    public Transform startpos;// стартовая позиция
+    public GameObject redCube;// префаб черный куб
    
-    public int playerSpeed;
+    public int playerSpeed;//скорость передвижения
+
+     public GameObject closestCube; 
+     
+     GameObject closestFinishCube; //ближайший финиш-кубик
+
     void Start()
     {
         boxCollider = gameObject.GetComponent<BoxCollider>();
         colorType = "Green";
         rb = gameObject.GetComponent<Rigidbody>();  
 
-
         //подписываемся на событие, при котором заканчивается фаза 
         GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;
+        
     }
 
     
@@ -47,8 +55,11 @@ public class HeroCube : Cube // герой как и любой куб явля�
         }
     }
 
-    void OnEndPhase()
+    void OnEndPhase()//метод, вызывается при окончании фазы
     {
-        Debug.Log("I'll be lucky");
+        Instantiate(redCube,transform.position, Quaternion.identity);//создаем на своем месте красный куб(до перемещения)
+
+        transform.position = startpos.position; //перемещаемся в начальную позицию
     }
 }
+

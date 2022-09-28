@@ -6,6 +6,8 @@ public class FinishCube : Cube
 {
     public bool activated;// вставлен ли игровой куб в фишишный куб
     public float distanceToActivate; //дистанция, необходимая чтобы куб считался вставленным 
+
+  
     void Start()
     {
         activated = false;
@@ -27,7 +29,7 @@ public class FinishCube : Cube
     }
 
     public GameObject closestCube; 
-    GameObject FindClosestPlayerCube() // ищет ближайший из кубов
+    GameObject FindClosestPlayerCube() //метод, ищет ближайший из кубов
     {
         GameObject[] cubesThanCanActivate;
         cubesThanCanActivate = GameObject.FindGameObjectsWithTag("CubePart");// ищет кубы, которые могут его активировать - желтые \ зеленые

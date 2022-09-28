@@ -115,5 +115,6 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   activated: 0
   distanceToActivate: 0.15
+  redCube: {fileID: 8979141608690693933, guid: f9c9268c537962245bac82b2955600bb, type: 3}
   distanceToClosestCube: 0
   closestCube: {fileID: 0}
