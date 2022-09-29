@@ -6,14 +6,15 @@ public class HeroCube : Cube // герой как и любой куб явля�
 {
     public Rigidbody rb; 
 
-    public Transform startpos;// стартовая позиция
-    public GameObject redCube;// префаб черный куб
-   
-    public int playerSpeed;//скорость передвижения
+    public Transform startpos;              // стартовая позиция
 
-     public GameObject closestCube; 
+    public GameObject redCube;              // префаб черный куб
+   
+    public int playerSpeed;                 //скорость передвижения
      
-     GameObject closestFinishCube; //ближайший финиш-кубик
+     GameObject closestFinishCube;          //ближайший финиш-кубик
+
+     [SerializeField] bool isGrounded;      //стоит ли на земле
 
     void Start()
     {
@@ -33,7 +34,13 @@ public class HeroCube : Cube // герой как и любой куб явля�
         Jump();
     }
 
-    private void  Move() // передвижение
+    void OnEndPhase()                                                 //метод, вызывается при окончании фазы
+    {
+        Instantiate(redCube,transform.position, Quaternion.identity); //создаем на своем месте красный куб(до перемещения)
+
+        transform.position = startpos.position;                       //перемещаемся в начальную позицию
+    }
+    private void  Move()            // передвижение
     {
         if(Input.GetKey(KeyCode.A))
         {
@@ -46,20 +53,60 @@ public class HeroCube : Cube // герой как и любой куб явля�
         }
     }
 
-    public float jumpForce;// сила прыжка
-    private void Jump()//прыжок
+    public float jumpForce;         // сила прыжка
+    private void Jump()             //прыжок
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGroundedOrNot() == true)
         {
             rb.AddForce(Vector3.up * jumpForce);
         }
     }
 
-    void OnEndPhase()//метод, вызывается при окончании фазы
-    {
-        Instantiate(redCube,transform.position, Quaternion.identity);//создаем на своем месте красный куб(до перемещения)
 
-        transform.position = startpos.position; //перемещаемся в начальную позицию
+
+    public bool isGroundedOrNot()             //узнаем, стоим ли мы на земле. это нужно например для прыжка
+    {
+        bool isGrounded = false; 
+        foreach(CubePart cubePart in transform.GetComponentsInChildren<CubePart>())//
+        {                                                                          //проверяем, стоит ли какой нибудь из присоедененных желтых кубов на земле
+            if(cubePart.IsGrounded() == true)                                 //
+            {                                                                      //
+                isGrounded = true;                                                 //
+            }                                                                      //
+        }                                
+
+        if (IsGrounded() == true) 
+        {                                                                          // проверяем, приземлен ли на земле сам зеленый куб
+            isGrounded = true;                                                     //
+        }                                                                          //
+        return isGrounded;
+    }
+
+
+
+
+
+     
+    public float maxGroundDistance;
+
+     
+ 
+    public bool IsGrounded() //проверяет , стоит ли именно зеленый куб на чем нибудь твердом (с помощью луча)
+    {
+        RaycastHit hit;
+
+        Ray ray = new Ray (transform.position, Vector3.down);
+         
+        Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);   
+
+        if ((hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
 

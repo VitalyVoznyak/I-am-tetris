@@ -8,6 +8,8 @@ TagManager:
   - ConnectZone
   - CubePart
   - PhaseController
+  - WhiteCube
+  - RedCube
   layers:
   - Default
   - TransparentFX

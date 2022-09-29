@@ -11,6 +11,8 @@ public class CubePart : Cube
 
     GameObject closestFinishCube; //ближайший финиш-кубик
 
+    public bool thisCubeisGrounded;//приземлен ли данный кубик
+
     void Start()
     {
         IsConnected = false;
@@ -48,10 +50,10 @@ public class CubePart : Cube
              transform.parent = GameObject.FindGameObjectWithTag("Player").transform;
 
              //включение собственных зон для присоеденения
-             transform.Find($"HeroCubeConnectZone").GetComponent<BoxCollider>().enabled = true;
-             transform.Find($"HeroCubeConnectZone1").GetComponent<BoxCollider>().enabled = true;
-             transform.Find($"HeroCubeConnectZone2").GetComponent<BoxCollider>().enabled = true;
-             transform.Find($"HeroCubeConnectZone3").GetComponent<BoxCollider>().enabled = true;
+             transform.Find($"CubeConnectZone").GetComponent<BoxCollider>().enabled = true;
+             transform.Find($"CubeConnectZone1").GetComponent<BoxCollider>().enabled = true;
+             transform.Find($"CubeConnectZone2").GetComponent<BoxCollider>().enabled = true;
+             transform.Find($"CubeConnectZone(Down)").GetComponent<BoxCollider>().enabled = true;
 
              //удаление триггера присоеденения
              //Destroy(other.gameObject);
@@ -59,6 +61,29 @@ public class CubePart : Cube
              transform.localScale = new Vector3(0.98f,0.98f,0.98f);//уменьшаемся в размере, чтобы лучше помещаться в щели 
 
              Destroy(rb);
+        }
+    }
+
+    
+    
+
+     
+    public float maxGroundDistance;
+    public bool IsGrounded() //проверяет , стоит ли на чем нибудь твердом (с помощью луча)
+    {
+        RaycastHit hit;
+
+        Ray ray = new Ray (transform.position, Vector3.down);
+         
+        Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);   
+
+        if ((hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

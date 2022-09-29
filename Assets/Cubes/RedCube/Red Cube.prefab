@@ -110,3 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449730c1a4f6877468b110cb2d84f4d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorType: 
+  pos: {x: 0, y: 0, z: 0}
+  boxCollider: {fileID: 0}

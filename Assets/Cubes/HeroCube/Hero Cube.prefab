@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4670408056876244789}
   - component: {fileID: 4670408056876244790}
   m_Layer: 0
-  m_Name: HeroCubeConnectZone2
+  m_Name: HeroCubeConnectZone
   m_TagString: ConnectZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -654,4 +654,6 @@ MonoBehaviour:
   startpos: {fileID: 0}
   redCube: {fileID: 8979141608690693933, guid: f9c9268c537962245bac82b2955600bb, type: 3}
   playerSpeed: 4
+  isGrounded: 0
   jumpForce: 330
+  maxGroundDistance: 8

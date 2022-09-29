@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1789044784077344989}
   - component: {fileID: 1789044784077344988}
   m_Layer: 0
-  m_Name: HeroCubeConnectZone
+  m_Name: CubeConnectZone
   m_TagString: ConnectZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 1789044784447583097}
   - component: {fileID: 1789044784447583096}
   m_Layer: 0
-  m_Name: HeroCubeConnectZone3
+  m_Name: CubeConnectZone(Down)
   m_TagString: ConnectZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 1789044784699018017}
   - component: {fileID: 1789044784699018016}
   m_Layer: 0
-  m_Name: HeroCubeConnectZone1
+  m_Name: CubeConnectZone1
   m_TagString: ConnectZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 1789044784849694370}
   - component: {fileID: 1789044784849694381}
   m_Layer: 0
-  m_Name: HeroCubeConnectZone2
+  m_Name: CubeConnectZone2
   m_TagString: ConnectZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,3 +652,5 @@ MonoBehaviour:
   boxCollider: {fileID: 0}
   IsConnected: 0
   redCube: {fileID: 8979141608690693933, guid: f9c9268c537962245bac82b2955600bb, type: 3}
+  thisCubeisGrounded: 0
+  maxGroundDistance: 0.5
