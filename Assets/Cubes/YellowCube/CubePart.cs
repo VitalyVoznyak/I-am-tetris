@@ -69,11 +69,11 @@ public class CubePart : Cube
 
      
     public float maxGroundDistance;
-    public bool IsGrounded() //проверяет , стоит ли на чем нибудь твердом (с помощью луча)
+    public bool IsGrounded() //проверяет , стоит ли именно зеленый куб на чем нибудь твердом (с помощью двух лучей сразу)
     {
         RaycastHit hit;
 
-        Ray ray = new Ray (transform.position, Vector3.down);
+        Ray ray = new Ray (new Vector3(transform.position.x - 0.5f,transform.position.y,transform.position.z), Vector3.down);
          
         Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);   
 
@@ -83,7 +83,17 @@ public class CubePart : Cube
         }
         else
         {
-            return false;
+           
+
+            ray = new Ray (new Vector3(transform.position.x + 0.5f,transform.position.y,transform.position.z), Vector3.down);
+         
+            Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore); 
+
+             if ((hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+        {
+            return true;
+        }
+        else return false;
         }
     }
 }
