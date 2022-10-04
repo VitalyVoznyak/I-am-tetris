@@ -6,7 +6,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
 {
     public Rigidbody rb; 
 
-    public Transform startpos;              // стартовая позиция
+    public Transform startPos;              // стартовая позиция
 
     public GameObject redCube;              // префаб черный куб
    
@@ -20,7 +20,8 @@ public class HeroCube : Cube // герой как и любой куб явля�
     {
         boxCollider = gameObject.GetComponent<BoxCollider>();
         colorType = "Green";
-        rb = gameObject.GetComponent<Rigidbody>();  
+        rb = gameObject.GetComponent<Rigidbody>();
+        transform.localScale = new Vector3(95f, 95f, 95f);
 
         //подписываемся на событие, при котором заканчивается фаза 
         GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;
@@ -38,7 +39,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
     {
         Instantiate(redCube,transform.position, Quaternion.identity); //создаем на своем месте красный куб(до перемещения)
 
-        transform.position = startpos.position;                       //перемещаемся в начальную позицию
+        transform.position = startPos.position;                       //перемещаемся в начальную позицию
     }
     private void  Move()            // передвижение
     {
@@ -99,7 +100,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
          
         Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);   
 
-        if ((hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+        if (hit.collider != null && (hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
         {
             return true;
         }
@@ -111,7 +112,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
          
             Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore); 
 
-             if ((hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+             if (hit.collider != null && (hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
         {
             return true;
         }

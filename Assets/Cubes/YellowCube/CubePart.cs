@@ -17,7 +17,7 @@ public class CubePart : Cube
     {
         IsConnected = false;
         rb = gameObject.GetComponent<Rigidbody>();
-
+        rb.isKinematic = true;
         GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;//подписка на событие
     }
 
@@ -38,8 +38,8 @@ public class CubePart : Cube
         // процесс присоединения данного куба к игроку
         if (other.tag == "ConnectZone" && IsConnected == false)
         {
-
-            IsConnected = true;
+             IsConnected = true;
+             rb.isKinematic = false;
              // ищем точку в которую переместится данный объект
              GameObject point = other.transform.Find("PointForConnect").gameObject; 
             
@@ -58,7 +58,7 @@ public class CubePart : Cube
              //удаление триггера присоеденения
              //Destroy(other.gameObject);
              
-             transform.localScale = new Vector3(0.98f,0.98f,0.98f);//уменьшаемся в размере, чтобы лучше помещаться в щели 
+             transform.localScale = new Vector3(0.95f,0.95f,0.95f);//уменьшаемся в размере, чтобы лучше помещаться в щели 
 
              Destroy(rb);
         }
@@ -77,23 +77,24 @@ public class CubePart : Cube
          
         Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);   
 
-        if ((hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+        if (hit.collider != null && (hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
         {
             return true;
         }
         else
         {
-           
-
             ray = new Ray (new Vector3(transform.position.x + 0.5f,transform.position.y,transform.position.z), Vector3.down);
          
-            Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore); 
+            Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);
 
-             if ((hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
-        {
-            return true;
-        }
-        else return false;
+            if (hit.collider != null && (hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
