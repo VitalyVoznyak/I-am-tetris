@@ -561,7 +561,7 @@ MonoBehaviour:
   IsConnected: 0
   redCube: {fileID: 8979141608690693933, guid: f9c9268c537962245bac82b2955600bb, type: 3}
   thisCubeisGrounded: 0
-  maxGroundDistance: 0.5
+  maxGroundDistance: 0.7
 --- !u!64 &603438198789336995
 MeshCollider:
   m_ObjectHideFlags: 0

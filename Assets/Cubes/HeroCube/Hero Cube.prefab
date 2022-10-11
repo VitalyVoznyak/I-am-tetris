@@ -657,7 +657,7 @@ MonoBehaviour:
   playerSpeed: 4
   isGrounded: 0
   jumpForce: 1720
-  maxGroundDistance: 0.5
+  maxGroundDistance: 0.7
 --- !u!64 &1444180612
 MeshCollider:
   m_ObjectHideFlags: 0

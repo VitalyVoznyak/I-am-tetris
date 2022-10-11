@@ -21,7 +21,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
         boxCollider = gameObject.GetComponent<BoxCollider>();
         colorType = "Green";
         rb = gameObject.GetComponent<Rigidbody>();
-        transform.localScale = new Vector3(95f, 95f, 95f);
+        //transform.localScale = new Vector3(95f, 95f, 95f);
 
         //подписываемся на событие, при котором заканчивается фаза 
         GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;
@@ -96,7 +96,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
     {
         RaycastHit hit;
 
-        Ray ray = new Ray (new Vector3(transform.position.x - 0.5f,transform.position.y,transform.position.z), Vector3.down);
+        Ray ray = new Ray (new Vector3(transform.position.x - 0.48f,transform.position.y,transform.position.z), Vector3.down);
          
         Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);   
 
@@ -108,7 +108,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
         {
            
 
-            ray = new Ray (new Vector3(transform.position.x + 0.5f,transform.position.y,transform.position.z), Vector3.down);
+            ray = new Ray (new Vector3(transform.position.x + 0.48f,transform.position.y,transform.position.z), Vector3.down);
          
             Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore); 
 
