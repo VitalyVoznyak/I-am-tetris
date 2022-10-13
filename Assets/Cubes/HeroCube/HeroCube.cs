@@ -52,12 +52,17 @@ public class HeroCube : Cube // герой как и любой куб явля�
         {
             rb.velocity = Vector3.right * playerSpeed + Vector3.up * rb.velocity.y;
         }
+
+        if (Input.GetKey(KeyCode.D) == false && Input.GetKey(KeyCode.A) == false && FigureIsGrounded())//
+        {                                                                        // чтобы не скользил лишний раз когда должен стоятть на земле
+            rb.velocity = new Vector3(0f ,rb.velocity.y, 0f);                    //
+        }
     }
 
     public float jumpForce;         // сила прыжка
     private void Jump()             //прыжок
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGroundedOrNot() == true)
+        if (Input.GetKeyDown(KeyCode.Space) && FigureIsGrounded() == true)
         {
             rb.AddForce(Vector3.up * jumpForce);
         }
@@ -65,7 +70,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
 
 
 
-    public bool isGroundedOrNot()             //узнаем, стоим ли мы на земле. это нужно например для прыжка
+    public bool FigureIsGrounded()             //узнаем, стоим ли мы на земле. это нужно например для прыжка
     {
         bool isGrounded = false; 
         foreach(CubePart cubePart in transform.GetComponentsInChildren<CubePart>())//
@@ -76,7 +81,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
             }                                                                      //
         }                                
 
-        if (IsGrounded() == true) 
+        if (GreenCubeIsGrounded() == true) 
         {                                                                          // проверяем, приземлен ли на земле сам зеленый куб
             isGrounded = true;                                                     //
         }                                                                          //
@@ -92,11 +97,11 @@ public class HeroCube : Cube // герой как и любой куб явля�
 
      
  
-    public bool IsGrounded() //проверяет , стоит ли именно зеленый куб на чем нибудь твердом (с помощью двух лучей сразу)
+    public bool GreenCubeIsGrounded() //проверяет , стоит ли именно зеленый куб на чем нибудь твердом (с помощью двух лучей сразу)
     {
         RaycastHit hit;
 
-        Ray ray = new Ray (new Vector3(transform.position.x - 0.48f,transform.position.y,transform.position.z), Vector3.down);
+        Ray ray = new Ray (new Vector3(transform.position.x - 0.4f,transform.position.y,transform.position.z), Vector3.down);
          
         Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);   
 
@@ -106,9 +111,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
         }
         else
         {
-           
-
-            ray = new Ray (new Vector3(transform.position.x + 0.48f,transform.position.y,transform.position.z), Vector3.down);
+            ray = new Ray (new Vector3(transform.position.x + 0.4f,transform.position.y,transform.position.z), Vector3.down);
          
             Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore); 
 

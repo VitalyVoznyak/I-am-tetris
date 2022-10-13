@@ -16,8 +16,10 @@ public class CubePart : Cube
     void Start()
     {
         IsConnected = false;
+
         rb = gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = true;
+
         GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;//подписка на событие
     }
 
@@ -73,7 +75,7 @@ public class CubePart : Cube
     {
         RaycastHit hit;
 
-        Ray ray = new Ray (new Vector3(transform.position.x - 0.5f,transform.position.y,transform.position.z), Vector3.down);
+        Ray ray = new Ray (new Vector3(transform.position.x - 0.4f,transform.position.y,transform.position.z), Vector3.down);
          
         Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);   
 
@@ -83,7 +85,7 @@ public class CubePart : Cube
         }
         else
         {
-            ray = new Ray (new Vector3(transform.position.x + 0.5f,transform.position.y,transform.position.z), Vector3.down);
+            ray = new Ray (new Vector3(transform.position.x + 0.4f,transform.position.y,transform.position.z), Vector3.down);
          
             Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);
 
