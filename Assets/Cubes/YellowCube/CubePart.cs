@@ -13,14 +13,19 @@ public class CubePart : Cube
 
     public bool thisCubeisGrounded;//приземлен ли данный кубик
 
+    private Vector3 startPos;//изначальная позиция
+
     void Start()
     {
-        IsConnected = false;
+        IsConnected = false;// изначально не присоединен
+
+        startPos = transform.position;
 
         rb = gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = true;
 
-        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;//подписка на событие
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;//подписка на событие 
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().restartPhase += OnRestartPhase;//подписка на событие 
     }
 
     void OnEndPhase()
@@ -33,12 +38,30 @@ public class CubePart : Cube
             }
     }
     
+    void OnRestartPhase()//при рестарте фазы возвращаем на сови места
+    {
+        if (IsConnected)
+        {
+            IsConnected = false;
+            transform.parent = null;
+            transform.position = startPos;
 
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.mass = 6;
+            rb.isKinematic = true;
+
+            //включение собственных зон для присоеденения
+            transform.Find($"CubeConnectZone").GetComponent<BoxCollider>().enabled = false;
+            transform.Find($"CubeConnectZone1").GetComponent<BoxCollider>().enabled = false;
+            transform.Find($"CubeConnectZone2").GetComponent<BoxCollider>().enabled = false;
+            transform.Find($"CubeConnectZone(Down)").GetComponent<BoxCollider>().enabled = false;
+        }
+    }
      
     private void OnTriggerEnter(Collider other)// процесс присоединения данного куба к игроку
     {   
         // процесс присоединения данного куба к игроку
-        if (other.tag == "ConnectZone" && IsConnected == false)
+        if (other.tag == "ConnectZone" && IsConnected == false  && other.transform.parent.gameObject == closestYellowOrGreenCube())
         {
              IsConnected = true;
              rb.isKinematic = false;
@@ -56,20 +79,28 @@ public class CubePart : Cube
              transform.Find($"CubeConnectZone1").GetComponent<BoxCollider>().enabled = true;
              transform.Find($"CubeConnectZone2").GetComponent<BoxCollider>().enabled = true;
              transform.Find($"CubeConnectZone(Down)").GetComponent<BoxCollider>().enabled = true;
-
-             //удаление триггера присоеденения
-             //Destroy(other.gameObject);
-             
-             //transform.localScale = new Vector3(0.95f,0.95f,0.95f);//уменьшаемся в размере, чтобы лучше помещаться в щели 
-
              Destroy(rb);
         }
     }
-
     
-    
+    GameObject closestYellowOrGreenCube() //ищем ближайший куб к которому можно присоедениться
+    {
+        GameObject cubeForConnect = GameObject.FindGameObjectWithTag("Player");
 
-     
+        GameObject[] yellowCubes = GameObject.FindGameObjectsWithTag("CubePart");
+
+        foreach (GameObject yellowCube in yellowCubes)
+        {
+            if  (Vector3.Distance(yellowCube.transform.position, transform.position)
+               < Vector3.Distance(cubeForConnect.transform.position, transform.position)
+              && yellowCube != this.gameObject)
+            {
+                cubeForConnect = yellowCube;
+            };
+        }
+        return cubeForConnect;
+    }
+  
     public float maxGroundDistance;
     public bool IsGrounded() //проверяет , стоит ли именно зеленый куб на чем нибудь твердом (с помощью двух лучей сразу)
     {
@@ -95,7 +126,18 @@ public class CubePart : Cube
             }
             else
             {
-                return false;
+                ray = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
+
+                Physics.Raycast(ray, out hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore);
+
+                if (hit.collider != null && (hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

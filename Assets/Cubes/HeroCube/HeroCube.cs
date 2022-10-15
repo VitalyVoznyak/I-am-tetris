@@ -25,7 +25,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
 
         //подписываемся на событие, при котором заканчивается фаза 
         GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;
-        
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().restartPhase += OnRestartPhase;//подписка на событие
     }
 
     
@@ -57,6 +57,8 @@ public class HeroCube : Cube // герой как и любой куб явля�
         {                                                                        // чтобы не скользил лишний раз когда должен стоятть на земле
             rb.velocity = new Vector3(0f ,rb.velocity.y, 0f);                    //
         }
+
+        transform.position = new Vector3(transform.position.x, transform.position.y,0f);
     }
 
     public float jumpForce;         // сила прыжка
@@ -88,20 +90,17 @@ public class HeroCube : Cube // герой как и любой куб явля�
         return isGrounded;
     }
 
-
-
-
-
+    void OnRestartPhase()
+    {
+        transform.position = startPos.position;
+    }
      
     public float maxGroundDistance;
-
-     
- 
-    public bool GreenCubeIsGrounded() //проверяет , стоит ли именно зеленый куб на чем нибудь твердом (с помощью двух лучей сразу)
+    public bool GreenCubeIsGrounded() //проверяет , стоит ли именно зеленый куб на чем нибудь твердом (с помощью трех лучей сразу)
     {
         RaycastHit hit;
 
-        Ray ray = new Ray (new Vector3(transform.position.x - 0.4f,transform.position.y,transform.position.z), Vector3.down);
+        Ray ray = new Ray (new Vector3(transform.position.x - 0.45f,transform.position.y,transform.position.z), Vector3.down);
          
         Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);   
 
@@ -111,15 +110,30 @@ public class HeroCube : Cube // герой как и любой куб явля�
         }
         else
         {
-            ray = new Ray (new Vector3(transform.position.x + 0.4f,transform.position.y,transform.position.z), Vector3.down);
+            ray = new Ray (new Vector3(transform.position.x + 0.45f,transform.position.y,transform.position.z), Vector3.down);
          
-            Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore); 
+            Physics.Raycast(ray,out hit,Mathf.Infinity,1,QueryTriggerInteraction.Ignore);
 
-             if (hit.collider != null && (hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
-        {
-            return true;
-        }
-        else return false;
+            if (hit.collider != null && (hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+            {
+                return true;
+            }
+            else
+            {
+                ray = new Ray(new Vector3(transform.position.x + 0.4f, transform.position.y, transform.position.z), Vector3.down);
+
+                Physics.Raycast(ray, out hit, Mathf.Infinity, 1, QueryTriggerInteraction.Ignore);
+
+                if (hit.collider != null && (hit.collider.gameObject.tag == "WhiteCube" || hit.collider.gameObject.tag == "RedCube") && hit.distance < maxGroundDistance)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
         }
     }
 }

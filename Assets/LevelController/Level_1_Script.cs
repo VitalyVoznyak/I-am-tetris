@@ -8,7 +8,10 @@ public class Level_1_Script : MonoBehaviour
 // PS фаза - Gameobject содержащий в себе группу  дочерних фишиш-кубиков,
 //    при прохождении одной фазы запускается следущая и так до конца уровня
     public delegate void EndPhaseEvent();//делегат для события завершения фазы
-    public event EndPhaseEvent endPhase; 
+    public delegate void RestartPhase();//делегат для рестарта фазы
+    
+    public event EndPhaseEvent endPhase;
+    public event RestartPhase restartPhase;
 
     public int howManyPhases;//как много фаз в уровне
     public GameObject phasesParent;//родительский объект для всех фаз
@@ -47,6 +50,11 @@ public class Level_1_Script : MonoBehaviour
             forCheck = false;
             EndPhase();
         }
+
+        if ( Input.GetKeyDown(KeyCode.R))
+        {
+            restartPhase.Invoke();
+        }
     }
 
     void EndPhase()
@@ -61,6 +69,10 @@ public class Level_1_Script : MonoBehaviour
     }
     [SerializeField] bool forCheck;  
     public FinishCube[] finishCubes;
+
+    
+
+
      bool AllFinishCubeActivated()//проверяет, вставленны ли кубы на свои места, возвращает true или false
     {
         finishCubes = phases[phaseCount].GetComponentsInChildren<FinishCube>();
@@ -75,7 +87,7 @@ public class Level_1_Script : MonoBehaviour
                }
                
           }
-          return forCheck;
-          
+          return forCheck;  
     }
+
 }
