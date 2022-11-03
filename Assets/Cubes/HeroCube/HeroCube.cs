@@ -24,8 +24,8 @@ public class HeroCube : Cube // герой как и любой куб явля�
         //transform.localScale = new Vector3(95f, 95f, 95f);
 
         //подписываемся на событие, при котором заканчивается фаза 
-        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;
-        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().restartPhase += OnRestartPhase;//подписка на событие
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_Controller>().endPhase += OnEndPhase;
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_Controller>().restartPhase += OnRestartPhase;//подписка на событие
     }
 
     
@@ -58,7 +58,8 @@ public class HeroCube : Cube // герой как и любой куб явля�
             rb.velocity = new Vector3(0f ,rb.velocity.y, 0f);                    //
         }
 
-        transform.position = new Vector3(transform.position.x, transform.position.y,0f);
+        transform.position = new Vector3(transform.position.x, transform.position.y,0f);//фиксируем по позиции Z
+        if (transform.position.y < -7){OnRestartPhase();}// при выходе за пределы карты начинаем фазу заново
     }
 
     public float jumpForce;         // сила прыжка

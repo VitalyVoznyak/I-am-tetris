@@ -4,5 +4,29 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 07808034954ecae41b55fbd8adea3b69
+  - enabled: 1
+    path: Assets/Scenes/Level_Squl.unity
+    guid: 5f64e5ccca917c945b3d44d036948aff
+  - enabled: 1
+    path: Assets/Scenes/Level_Girl.unity
+    guid: 226542204b94d0946b2af24eff635ac7
+  - enabled: 1
+    path: Assets/Scenes/Level_Like.unity
+    guid: deb8a577aac7ca34ab83c35c2c6a0758
+  - enabled: 1
+    path: Assets/Scenes/Level_Cup.unity
+    guid: 6ad6aff05883b204d9c1a07244e9b41b
+  - enabled: 1
+    path: Assets/Scenes/Level_Arrow.unity
+    guid: 14986984dab00674087fa8d839b52f1e
+  - enabled: 1
+    path: Assets/Scenes/Level_Clocks.unity
+    guid: 0aac3c554c661454782c303c29f84514
+  - enabled: 1
+    path: Assets/Scenes/Level_Heart.unity
+    guid: 675dcf5349c3ed24cad184eac3911011
   m_configObjects: {}

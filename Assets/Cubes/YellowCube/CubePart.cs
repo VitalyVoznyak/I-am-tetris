@@ -24,8 +24,8 @@ public class CubePart : Cube
         rb = gameObject.GetComponent<Rigidbody>();
         rb.isKinematic = true;
 
-        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().endPhase += OnEndPhase;//подписка на событие 
-        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_1_Script>().restartPhase += OnRestartPhase;//подписка на событие 
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_Controller>().endPhase += OnEndPhase;//подписка на событие 
+        GameObject.FindGameObjectWithTag("PhaseController").GetComponent<Level_Controller>().restartPhase += OnRestartPhase;//подписка на событие 
     }
 
     void OnEndPhase()
