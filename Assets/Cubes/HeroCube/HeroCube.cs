@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroCube : Cube // герой как и любой куб является наследником класса Cube
 {
@@ -15,6 +16,9 @@ public class HeroCube : Cube // герой как и любой куб явля�
      GameObject closestFinishCube;          //ближайший финиш-кубик
 
      [SerializeField] bool isGrounded;      //стоит ли на земле
+
+    public bool isPressLeftButton = false;
+    public bool isPressRightButton = false;
 
     void Start()
     {
@@ -32,7 +36,6 @@ public class HeroCube : Cube // герой как и любой куб явля�
     void Update()
     {
         Move();
-        Jump();
     }
 
     void OnEndPhase()                                                 //метод, вызывается при окончании фазы
@@ -43,32 +46,36 @@ public class HeroCube : Cube // герой как и любой куб явля�
     }
     private void  Move()            // передвижение
     {
-        if(Input.GetKey(KeyCode.A))
+        if (isPressLeftButton == false && isPressLeftButton == false && FigureIsGrounded())//
+        {                                                                        // чтобы не скользил лишний раз когда должен стоятть на земле
+            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);                    //
+        }
+
+        if (isPressLeftButton)
         {
             rb.velocity = Vector3.left * playerSpeed + Vector3.up * rb.velocity.y; 
+            isPressLeftButton = false;
         }
 
-        if(Input.GetKey(KeyCode.D))
+        if(isPressRightButton)
         {
             rb.velocity = Vector3.right * playerSpeed + Vector3.up * rb.velocity.y;
-        }
-
-        if (Input.GetKey(KeyCode.D) == false && Input.GetKey(KeyCode.A) == false && FigureIsGrounded())//
-        {                                                                        // чтобы не скользил лишний раз когда должен стоятть на земле
-            rb.velocity = new Vector3(0f ,rb.velocity.y, 0f);                    //
+            isPressRightButton = false;
         }
 
         transform.position = new Vector3(transform.position.x, transform.position.y,0f);//фиксируем по позиции Z
         if (transform.position.y < -7){OnRestartPhase();}// при выходе за пределы карты начинаем фазу заново
     }
 
+  
+
     public float jumpForce;         // сила прыжка
-    private void Jump()             //прыжок
+    public void Jump()             //прыжок
     {
-        if (Input.GetKeyDown(KeyCode.Space) && FigureIsGrounded() == true)
-        {
-            rb.AddForce(Vector3.up * jumpForce);
-        }
+       if  (FigureIsGrounded() == true)
+       {
+           rb.AddForce(Vector3.up * jumpForce);
+       }
     }
 
 

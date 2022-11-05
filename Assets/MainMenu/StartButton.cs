@@ -28,6 +28,8 @@ public class StartButton : MonoBehaviour
         this.gameObject.SetActive(false) ;
    }
    public GameObject[] buttons;
+
+
 }
 
 //Squl

@@ -54,16 +54,15 @@ public class Level_Controller : MonoBehaviour
                forCheck = false;
                EndPhase();
             }
-
-            if ( Input.GetKeyDown(KeyCode.R))
-            {
-               restartPhase.Invoke();
-            }
         }
        
 
 
         if (Input.GetKey(KeyCode.Backspace) == true){ EndLastPhase();endLastPhase.Invoke();}
+    }
+    public void onPressRestartButton()
+    {
+        restartPhase.Invoke();
     }
 
     void EndPhase()
@@ -96,6 +95,7 @@ public class Level_Controller : MonoBehaviour
         }
 
         PlayerPrefs.SetInt($"{this.gameObject.scene.name}",1);
+        StartCoroutine(GoBackToMenu());
     }
 
     [SerializeField] bool forCheck;  
@@ -116,6 +116,11 @@ public class Level_Controller : MonoBehaviour
                
           }
           return forCheck;  
+    }
+    IEnumerator GoBackToMenu()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene(0);
     }
 
 }

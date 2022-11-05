@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 101131657}
   m_Layer: 5
   m_Name: 'Level 2 Button '
-  m_TagString: Untagged
+  m_TagString: ButtonMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26dc830d44093448a56d102f449f8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level:
-    m_Handle: 0
+  numbOfLevel: 2
+  startButton: {fileID: 1674684759}
 --- !u!1 &193949140
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 392690619}
   m_Layer: 5
   m_Name: 'Level 7 Button '
-  m_TagString: Untagged
+  m_TagString: ButtonMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -556,8 +556,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26dc830d44093448a56d102f449f8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level:
-    m_Handle: 0
+  numbOfLevel: 7
+  startButton: {fileID: 1674684759}
 --- !u!1 &434976768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1156,7 +1156,7 @@ GameObject:
   - component: {fileID: 872292857}
   m_Layer: 5
   m_Name: 'Level 5 Button '
-  m_TagString: Untagged
+  m_TagString: ButtonMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1175,7 +1175,7 @@ RectTransform:
   m_Children:
   - {fileID: 1385378404}
   m_Father: {fileID: 1670162249}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1288,8 +1288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26dc830d44093448a56d102f449f8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level:
-    m_Handle: 0
+  numbOfLevel: 5
+  startButton: {fileID: 1674684759}
 --- !u!1 &1095061954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1575,7 +1575,7 @@ GameObject:
   - component: {fileID: 1321205083}
   m_Layer: 5
   m_Name: Level 1 Button
-  m_TagString: Untagged
+  m_TagString: ButtonMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1707,8 +1707,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26dc830d44093448a56d102f449f8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level:
-    m_Handle: 0
+  numbOfLevel: 1
+  startButton: {fileID: 1674684759}
 --- !u!1 &1385378403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1861,7 +1861,7 @@ GameObject:
   - component: {fileID: 1607265207}
   m_Layer: 5
   m_Name: 'Level 3 Button  '
-  m_TagString: Untagged
+  m_TagString: ButtonMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1993,8 +1993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26dc830d44093448a56d102f449f8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level:
-    m_Handle: 0
+  numbOfLevel: 3
+  startButton: {fileID: 1674684759}
 --- !u!1 &1622141762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,7 +2010,7 @@ GameObject:
   - component: {fileID: 1622141767}
   m_Layer: 5
   m_Name: 'Level 4 Button  '
-  m_TagString: Untagged
+  m_TagString: ButtonMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2142,8 +2142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26dc830d44093448a56d102f449f8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level:
-    m_Handle: 0
+  numbOfLevel: 4
+  startButton: {fileID: 1674684759}
 --- !u!1 &1670162245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2241,8 +2241,8 @@ RectTransform:
   - {fileID: 101131653}
   - {fileID: 1607265203}
   - {fileID: 1622141763}
-  - {fileID: 1767356440}
   - {fileID: 872292853}
+  - {fileID: 1767356440}
   - {fileID: 392690615}
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -2423,7 +2423,7 @@ GameObject:
   - component: {fileID: 1767356444}
   m_Layer: 5
   m_Name: 'Level 6  Button  '
-  m_TagString: Untagged
+  m_TagString: ButtonMenu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2442,7 +2442,7 @@ RectTransform:
   m_Children:
   - {fileID: 1095061955}
   m_Father: {fileID: 1670162249}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2555,8 +2555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e26dc830d44093448a56d102f449f8f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level:
-    m_Handle: 0
+  numbOfLevel: 6
+  startButton: {fileID: 1674684759}
 --- !u!1001 &1980107921
 PrefabInstance:
   m_ObjectHideFlags: 0

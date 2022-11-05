@@ -11,6 +11,8 @@ TagManager:
   - WhiteCube
   - RedCube
   - FinalCameraPosition
+  - ButtonMenu
+  - StartButton
   layers:
   - Default
   - TransparentFX
