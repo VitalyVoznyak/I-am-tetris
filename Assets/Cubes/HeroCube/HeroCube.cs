@@ -46,7 +46,7 @@ public class HeroCube : Cube // герой как и любой куб явля�
     }
     private void  Move()            // передвижение
     {
-        if (isPressLeftButton == false && isPressLeftButton == false && FigureIsGrounded())//
+        if (isPressLeftButton == false && isPressLeftButton == false)//
         {                                                                        // чтобы не скользил лишний раз когда должен стоятть на земле
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);                    //
         }
