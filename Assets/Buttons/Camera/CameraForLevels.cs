@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CameraForLevels : MonoBehaviour
 {
-    GameObject player;
+    public GameObject player;
 
     public Vector3 distanceToPlayer;
 
-    bool levelCompleted;
+    
+    public bool levelCompleted;
     void Start()
     {
          player = GameObject.FindGameObjectWithTag("Player");

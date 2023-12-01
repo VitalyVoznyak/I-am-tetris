@@ -53,13 +53,13 @@ public class HeroCube : Cube // герой как и любой куб явля�
 
         if (isPressLeftButton)
         {
-            rb.velocity = Vector3.left * playerSpeed + Vector3.up * rb.velocity.y; 
+            rb.velocity = Vector3.left * playerSpeed + (Vector3.up * rb.velocity.y); 
             isPressLeftButton = false;
         }
 
         if(isPressRightButton)
         {
-            rb.velocity = Vector3.right * playerSpeed + Vector3.up * rb.velocity.y;
+            rb.velocity = Vector3.right * playerSpeed + (Vector3.up * rb.velocity.y);
             isPressRightButton = false;
         }
 
